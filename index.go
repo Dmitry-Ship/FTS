@@ -20,7 +20,7 @@ func getIntersection(a []int, b []int) []int {
 	if len(b) > maxLen {
 		maxLen = len(b)
 	}
-	r := make([]int, 0, maxLen)
+	result := make([]int, 0, maxLen)
 	var i, j int
 	for i < len(a) && j < len(b) {
 		if a[i] < b[j] {
@@ -28,27 +28,27 @@ func getIntersection(a []int, b []int) []int {
 		} else if a[i] > b[j] {
 			j++
 		} else {
-			r = append(r, a[i])
+			result = append(result, a[i])
 			i++
 			j++
 		}
 	}
-	return r
+	return result
 }
 
 func (idx index) search(text string) []int {
-	var r []int
+	var result []int
 	for _, token := range analyze(text) {
 		if ids, ok := idx[token]; ok {
-			if r == nil {
-				r = ids
+			if result == nil {
+				result = ids
 			} else {
-				r = getIntersection(r, ids)
+				result = getIntersection(result, ids)
 			}
 		} else {
 			// Token doesn't exist.
 			return nil
 		}
 	}
-	return r
+	return result
 }

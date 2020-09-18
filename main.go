@@ -33,9 +33,9 @@ func main() {
 	searchingStart := time.Now()
 	result := indexedText.search(query)
 
-	for _, id := range result {
-		doc := docs[id]
-		log.Printf("%d\t%s\n", id, doc.Text)
+	for _, docID := range result {
+		doc := docs[docID]
+		log.Printf("%d\t%s\n", docID, doc.Text)
 	}
 	fmt.Println(fmt.Printf("finished searching in %s with %d results", time.Since(searchingStart), len(result)))
 

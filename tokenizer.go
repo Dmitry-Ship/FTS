@@ -6,9 +6,9 @@ import (
 )
 
 func tokenize(text string) []string {
-	return strings.FieldsFunc(text, func(r rune) bool {
+	return strings.FieldsFunc(text, func(symbol rune) bool {
 		// Split on any character that is not a letter or a number.
-		return !unicode.IsLetter(r) && !unicode.IsNumber(r)
+		return !unicode.IsLetter(symbol) && !unicode.IsNumber(symbol)
 	})
 }
 

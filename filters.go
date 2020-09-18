@@ -7,11 +7,11 @@ import (
 )
 
 func lowercaseFilter(tokens []string) []string {
-	r := make([]string, 0, len(tokens))
+	result := make([]string, 0, len(tokens))
 	for _, token := range tokens {
-		r = append(r, strings.ToLower(token))
+		result = append(result, strings.ToLower(token))
 	}
-	return r
+	return result
 }
 
 var stopwords = map[string]struct{}{ // I wish Go had built-in sets.
@@ -20,23 +20,23 @@ var stopwords = map[string]struct{}{ // I wish Go had built-in sets.
 }
 
 func stopwordFilter(tokens []string) []string {
-	r := make([]string, 0, len(tokens))
+	result := make([]string, 0, len(tokens))
 	for _, token := range tokens {
 		if _, ok := stopwords[token]; !ok {
-			r = append(r, token)
+			result = append(result, token)
 		}
 	}
-	return r
+	return result
 }
 
 func stemmerFilter(tokens []string) []string {
-	r := make([]string, len(tokens))
+	result := make([]string, len(tokens))
 	for i, token := range tokens {
 		stemmed, err := snowball.Stem(token, "english", false)
 		if err != nil {
 			continue
 		}
-		r[i] = stemmed
+		result[i] = stemmed
 	}
-	return r
+	return result
 }

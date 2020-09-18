@@ -13,17 +13,17 @@ type document struct {
 }
 
 func loadDocuments(path string) ([]document, error) {
-	f, err := os.Open(path)
+	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer file.Close()
 
-	dec := xml.NewDecoder(f)
+	decoder := xml.NewDecoder(file)
 	dump := struct {
 		Documents []document `xml:"doc"`
 	}{}
-	if err := dec.Decode(&dump); err != nil {
+	if err := decoder.Decode(&dump); err != nil {
 		return nil, err
 	}
 
